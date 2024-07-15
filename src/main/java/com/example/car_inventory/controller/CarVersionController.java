@@ -31,6 +31,7 @@ public class CarVersionController {
         CarVersion carVersion = CarVersion.builder()
                 .versionName(versionName)
                 .carModel(carModel)
+                .inventory(0L)
                 .fullName(carModel.getBrand().getName() + " " + carModel.getName() + " " + versionName)
                 .build();
         return ResponseEntity.ok(carVersionService.createCarVersion(carVersion));
