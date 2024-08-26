@@ -34,6 +34,7 @@ public class CarVersionController {
                 .inventory(0L)
                 .fullName(carModel.getBrand().getName() + " " + carModel.getName() + " " + versionName)
                 .build();
+
         return ResponseEntity.ok(carVersionService.createCarVersion(carVersion));
     }
 
@@ -65,5 +66,16 @@ public class CarVersionController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/inventory")
+    public ResponseEntity<?> updateInventory(@PathVariable Long id, @RequestParam String operation) {
+        try {
+            CarVersion updatedCarVersion = carVersionService.updateInventory(id, operation);
+            return ResponseEntity.ok(updatedCarVersion);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
 
 }

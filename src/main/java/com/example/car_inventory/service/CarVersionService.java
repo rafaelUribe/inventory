@@ -18,4 +18,6 @@ public interface CarVersionService {
 
     void deleteCarVersion(Long id);
 
+    CarVersion updateInventory(Long id, String operation);
+
 }
